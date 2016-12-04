@@ -5,23 +5,31 @@ import {connect} from 'react-redux';
 class Layout extends React.Component {
 	constructor(){
 		super();
+		this.localStream = '';
+		this.local2dContext = '';
 	}
 
-	componentWillMount() {
-		var video = document.getElementById('video');
-		if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-			navigator.mediaDevices.getUserMedia({video:true}).then(function(stream) {
-				video.src = window.URL.createObjectURL(stream);
-				video.play();
-			})
-		}
+	componentDidMount() {
+		this.local2dContext = this.refs.localCanvas;
+
+		navigator.getUserMedia_ = (   navigator.getUserMedia
+                           || navigator.webkitGetUserMedia 
+                           || navigator.mozGetUserMedia 
+                           || navigator.msGetUserMedia);
+
+		navigator.getUserMedia({video:true, audio:true}, stream => {
+			this.localStream;
+			this.refs.localStream.src = window.URL.createObjectURL(this.localStream);
+		},function(err){
+			console.log("Error", err);
+		});
 	}
 	
 	render() {
 		
 		return (
 			<div>	
-				<video id="video" width="640" height="480" autoplay></video>
+				<video ref ='localCanvas' className = 'localCanvas' width="320" height="240"></video>
 				<button id="snap">Snap Photo</button>
 				<canvas id="canvas" width="640" height="480"></canvas>
 			</div>
@@ -31,7 +39,7 @@ class Layout extends React.Component {
 
 function mapStateToProps(state) {
 	return {
-		
+		example:state.example
 	};
 }
 
