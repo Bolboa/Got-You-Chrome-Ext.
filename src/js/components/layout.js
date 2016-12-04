@@ -23,6 +23,7 @@ class Layout extends React.Component {
 		},function(err){
 			console.log("Error", err);
 		});
+		
 	}
 	
 	render() {
