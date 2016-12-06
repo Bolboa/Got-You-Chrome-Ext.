@@ -23,9 +23,12 @@ class Layout extends React.Component {
 		},function(err){
 			console.log("Error", err);
 		});
+
 		
 	}
-	
+	openTab() {
+		chrome.tabs.create({'url': chrome.extension.getURL('./src/permission.html')});
+	}
 	render() {
 		
 		return (
@@ -33,6 +36,7 @@ class Layout extends React.Component {
 				<video ref ='localCanvas' className = 'localCanvas' width="320" height="240"></video>
 				<button id="snap">Snap Photo</button>
 				<canvas id="canvas" width="640" height="480"></canvas>
+				<button onClick={this.openTab}>open</button>
 			</div>
 		)
 	}
