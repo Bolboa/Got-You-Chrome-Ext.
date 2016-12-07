@@ -18,7 +18,7 @@ class Layout extends React.Component {
                            || navigator.msGetUserMedia);
 
 		navigator.getUserMedia({video:true, audio:true}, stream => {
-			this.localStream;
+			this.localStream = stream;
 			this.refs.localStream.src = window.URL.createObjectURL(this.localStream);
 		},function(err){
 			console.log("Error", err);
@@ -33,7 +33,7 @@ class Layout extends React.Component {
 		
 		return (
 			<div>	
-				<video ref ='localCanvas' className = 'localCanvas' width="320" height="240"></video>
+				<video ref='localStream' className='localCanvas' width="320" height="240"></video>
 				<button id="snap">Snap Photo</button>
 				<canvas id="canvas" width="640" height="480"></canvas>
 				<button onClick={this.openTab}>open</button>
