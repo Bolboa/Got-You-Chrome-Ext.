@@ -16,6 +16,7 @@ class Layout extends React.Component {
                            || navigator.mozGetUserMedia 
                            || navigator.msGetUserMedia);
 
+<<<<<<< HEAD
 		navigator.getUserMedia({ audio: true, video: { width: 1280, height: 720 } },
       		function(stream) {
       			this.localStream = stream;
@@ -27,6 +28,14 @@ class Layout extends React.Component {
 			});
 		}
 
+=======
+		navigator.getUserMedia({video:true, audio:true}, stream => {
+			this.localStream = stream;
+			this.refs.localStream.src = window.URL.createObjectURL(this.localStream);
+		},function(err){
+			console.log("Error", err);
+		});
+>>>>>>> 861f01477f7c9ee4be1265485143f039b9dfd0df
 
 	openTab() {
 		chrome.tabs.create({'url': chrome.extension.getURL('./src/index.html')});
@@ -35,7 +44,11 @@ class Layout extends React.Component {
 		
 		return (
 			<div>	
+<<<<<<< HEAD
 				<video ref='localStream' className='localCanvas' width="320" height="240" autoPlay></video>
+=======
+				<video ref='localStream' className='localCanvas' width="320" height="240"></video>
+>>>>>>> 861f01477f7c9ee4be1265485143f039b9dfd0df
 				<button id="snap">Snap Photo</button>
 				<canvas id="canvas" width="640" height="480"></canvas>
 				<button onClick={this.openTab}>open</button>
