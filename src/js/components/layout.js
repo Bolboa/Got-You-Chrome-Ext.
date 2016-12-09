@@ -10,30 +10,32 @@ class Layout extends React.Component {
 	}
 
 	componentDidMount() {
-		this.local2dContext = this.refs.localCanvas;
 
 		navigator.getUserMedia_ = (   navigator.getUserMedia
                            || navigator.webkitGetUserMedia 
                            || navigator.mozGetUserMedia 
                            || navigator.msGetUserMedia);
 
-		navigator.getUserMedia({video:true, audio:true}, stream => {
-			this.localStream;
-			this.refs.localStream.src = window.URL.createObjectURL(this.localStream);
-		},function(err){
-			console.log("Error", err);
-		});
+		navigator.getUserMedia({ audio: true, video: { width: 1280, height: 720 } },
+      		function(stream) {
+      			this.localStream = stream;
+				this.refs.localStream.src = window.URL.createObjectURL(this.localStream);
+				this.refs.localStream.play();
+			}.bind(this),
+			function(err) {
+				console.log("nope");
+			});
+		}
 
-		
-	}
+
 	openTab() {
-		chrome.tabs.create({'url': chrome.extension.getURL('./src/permission.html')});
+		chrome.tabs.create({'url': chrome.extension.getURL('./src/index.html')});
 	}
 	render() {
 		
 		return (
 			<div>	
-				<video ref ='localCanvas' className = 'localCanvas' width="320" height="240"></video>
+				<video ref='localStream' className='localCanvas' width="320" height="240" autoPlay></video>
 				<button id="snap">Snap Photo</button>
 				<canvas id="canvas" width="640" height="480"></canvas>
 				<button onClick={this.openTab}>open</button>
