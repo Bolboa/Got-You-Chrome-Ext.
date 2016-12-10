@@ -5,6 +5,9 @@ import {connect} from 'react-redux';
 class Layout extends React.Component {
 	constructor(){
 		super();
+		this.state = {
+			imageSource:''
+		}
 		this.localStream = '';
 		this.local2dContext = '';
 		this.localCanvas = '';
@@ -47,6 +50,13 @@ class Layout extends React.Component {
 		},0);
 	}
 
+	takePicture() {
+		//console.log(this.localCanvas);
+		var data = this.refs.localCanvas.toDataURL('image/png');
+		this.setState({imageSource:data});
+
+	}
+
 	/*openTab() {
 		chrome.tabs.create({'url': chrome.extension.getURL('./src/index.html')});
 	}*/
@@ -56,8 +66,10 @@ class Layout extends React.Component {
 			<div>	
 				<video ref='localStream' className='localCanvas' width="320" height="240" autoPlay></video>
 
-				<button id="snap">Snap Photo</button>
 				<canvas ref="localCanvas" id="canvas" width="640" height="480"></canvas>
+				
+    			<img id="photo" alt="The screen capture will appear in this box." src={this.state.imageSource} />
+  				<button onClick={this.takePicture.bind(this)} id="startbutton">Take photo</button>
 			</div>
 		)
 	}
