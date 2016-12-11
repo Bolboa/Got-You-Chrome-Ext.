@@ -11,7 +11,7 @@ class Layout extends React.Component {
 		this.localStream = '';
 		this.local2dContext = '';
 		this.localCanvas = '';
-		this.localCanvasLoop = '';
+		this.source = '';
 	}
 
 	componentDidMount() {
@@ -53,10 +53,32 @@ class Layout extends React.Component {
 	takePicture() {
 		//console.log(this.localCanvas);
 		var data = this.refs.localCanvas.toDataURL('image/png');
+		this.source = data;
 		this.setState({imageSource:data});
 
 	}
 
+	sendImage() {
+		console.log(this.source);
+		fetch('http://localhost:8080', {
+			method:'POST',
+			mode: 'no-cors',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				image:"hello"
+			})
+		})
+		.then((response) => response.json())
+		.then((responseJson) => {
+			console.log("response");
+		})
+		.catch(function(error) {
+			console.log(error);
+		})
+	}
 	/*openTab() {
 		chrome.tabs.create({'url': chrome.extension.getURL('./src/index.html')});
 	}*/
@@ -70,6 +92,7 @@ class Layout extends React.Component {
 				
     			<img id="photo" alt="The screen capture will appear in this box." src={this.state.imageSource} />
   				<button onClick={this.takePicture.bind(this)} id="startbutton">Take photo</button>
+  				<button onClick={this.sendImage.bind(this)} id="send_image">SEND</button>
 			</div>
 		)
 	}
