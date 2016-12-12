@@ -68,7 +68,7 @@ class Layout extends React.Component {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				image:"hello"
+				image:this.source
 			})
 		})
 		.then((response) => response.json())
