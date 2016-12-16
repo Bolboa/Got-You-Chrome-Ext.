@@ -24,6 +24,7 @@
   "devDependencies": {
     "babel-plugin-react-html-attrs": "^2.0.0",
     "css-loader": "^0.26.0",
+    "react-router": "^3.0.0",
     "style-loader": "^0.13.1"
   },
   "scripts": {

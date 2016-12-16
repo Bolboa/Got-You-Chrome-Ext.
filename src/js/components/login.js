@@ -1,7 +1,6 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import { browserHistory } from 'react-router';
 
 import Main from './subComponents/main';
 
@@ -34,10 +33,6 @@ class Layout extends React.Component {
 
 	
 	}
-
-	leave() {
-		browserHistory.push('/src/index.html/login');
-	}
 	/*openTab() {
 		chrome.tabs.create({'url': chrome.extension.getURL('./src/index.html')});
 	}*/
@@ -46,8 +41,8 @@ class Layout extends React.Component {
 		return (
 			<div>	
 
-				<Main source={this.state.imageSource} setup={this.sendImage.bind(this)} />
-				<button onClick={this.leave}>Leave</button>
+				<h1>HII</h1>
+				
 			</div>
 		)
 	}

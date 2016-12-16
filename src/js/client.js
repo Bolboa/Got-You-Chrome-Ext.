@@ -5,7 +5,10 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import allReducers from './reducers';
 
-import Layout from "./components/Layout";
+import { Router, Route, browserHistory, IndexRoute, Link } from 'react-router'
+
+import Layout from "./components/layout";
+import Login from "./components/login";
 
 require('./styles.css');
 
@@ -14,6 +17,9 @@ const store = createStore(allReducers);
 const app = document.getElementById('app');
 ReactDOM.render(
 	<Provider store={store}>
-		<Layout/>
+		<Router history={browserHistory}>
+			<Route path='/src/index.html' component={ Layout } />
+			<Route path='/src/index.html/login' component={ Login } />
+		</Router>
 	</Provider>
 	, app);

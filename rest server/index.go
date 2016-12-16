@@ -6,8 +6,10 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"log"
 	"encoding/json"
-	"io/ioutil"
+	"strings"
+	"encoding/base64"
 	"bytes"
+	"io/ioutil"
 	"gopkg.in/gomail.v2"
 )
 
@@ -16,38 +18,49 @@ type test_struct struct {
 }
 
 func GetImage(rw http.ResponseWriter, req *http.Request, _ httprouter.Params) {
-	buf, err := ioutil.ReadAll(req.Body)
-	reader := bytes.NewReader(buf)
 
-	var t test_struct
+	var img test_struct
 
+	json.NewDecoder(req.Body).Decode(&img)
 	
-	err = json.NewDecoder(reader).Decode(&t)
-	fmt.Println(string(buf))
-	if err != nil {
-		http.Error(rw, err.Error(), 400)
-        return
+	position := strings.Index(img.Test, ",")
+
+	if position == -1 {
+		fmt.Println("no match")
 	}
 
+	reader := base64.NewDecoder(base64.StdEncoding, bytes.NewBufferString(img.Test[position+1:]))
+
+	data, err := ioutil.ReadAll(reader)
+
+	if err != nil {
+
+	}
+	ioutil.WriteFile("./image.png", data, 0644)
+	sendImage()
+
+
+}
+
+func sendImage() {
 	mail := gomail.NewMessage()
 	mail.SetHeader("From", "ebolboa@gmail.com")
-	mail.SetHeader("To", "ebolboa@gmail.ca")
-	mail.SetHeader("Subject", "Hello!")
-	mail.SetBody("text/html", `<div>hello</div>`)
+	mail.SetHeader("To", "ebolboa@gmail.com")
+	mail.SetHeader("Subject", "works!")
+	mail.Attach("./image.png")
 
-	send := gomail.NewDialer("smtp.gmail.com", 587, "ebolboa@gmail.com", "password")
-	
+	send := gomail.NewDialer("smtp.gmail.com", 587, "ebolboa@gmail.com", "XXXXXXX")
 	if err := send.DialAndSend(mail); err != nil {
 		panic(err)
 	}
-
-
 }
 
 func main() {
 
 	router := httprouter.New()
 	router.POST("/", GetImage)
+
+	
 
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
