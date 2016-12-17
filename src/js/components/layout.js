@@ -8,13 +8,7 @@ import Main from './subComponents/main';
 class Layout extends React.Component {
 	constructor(){
 		super();
-		this.state = {
-			imageSource:''
-		}
-		this.localStream = '';
-		this.local2dContext = '';
-		this.localCanvas = '';
-		this.source = '';
+		
 	}
 
 
@@ -35,19 +29,13 @@ class Layout extends React.Component {
 	
 	}
 
-	leave() {
-		browserHistory.push('/src/index.html/login');
-	}
-	/*openTab() {
-		chrome.tabs.create({'url': chrome.extension.getURL('./src/index.html')});
-	}*/
+	
 	render() {
 		
 		return (
 			<div>	
 
-				<Main source={this.state.imageSource} setup={this.sendImage.bind(this)} />
-				<button onClick={this.leave}>Leave</button>
+				<Main setup={this.sendImage.bind(this)} />
 			</div>
 		)
 	}

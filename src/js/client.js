@@ -18,8 +18,8 @@ const app = document.getElementById('app');
 ReactDOM.render(
 	<Provider store={store}>
 		<Router history={browserHistory}>
-			<Route path='/src/index.html' component={ Layout } />
-			<Route path='/src/index.html/login' component={ Login } />
+			<Route path='/src/index.html' component={ Login } />
+			<Route path='/src/index.html/layout' component={ Layout } />
 		</Router>
 	</Provider>
 	, app);

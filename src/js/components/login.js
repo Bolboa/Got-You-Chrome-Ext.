@@ -1,47 +1,65 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-
+import { browserHistory } from 'react-router';
 import Main from './subComponents/main';
 
 class Layout extends React.Component {
 	constructor(){
 		super();
 		this.state = {
-			imageSource:''
+			email:'',
+			password:''
 		}
-		this.localStream = '';
-		this.local2dContext = '';
-		this.localCanvas = '';
-		this.source = '';
+	}
+
+	handleEmailChange(e) {
+		this.setState({email:e.target.value});
+	}
+
+	handlePasswordChange(e) {
+		this.setState({password:e.target.value});
 	}
 
 
+	submit() {
+		console.log(this.state.email);
+		var emailValidateRE = /^(([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+)?$/;
+		if (emailValidateRE.test(this.state.email) && this.state.password) {
 
+			fetch('http://localhost:8080/validation', {
+			method:'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				email:this.state.email,
+				password:this.state.password
+			})
+		})
+		.then((response) => response.json())
+		.then((responseJson) => {
+			console.log("response");
+		})
+		.catch(function(error) {
+			console.log(error);
+		})
 
-	sendImage() {
+			//browserHistory.push('/src/index.html/layout');
+		}
 
-		chrome.tabs.executeScript(null, {
-	        file: 'src/js/scripts/getMouseMovement.js'
-	     }, function() {
-	        // If you try and inject into an extensions page or the webstore/NTP you'll get an error
-	        if (chrome.runtime.lastError) {
-	            result = 'There was an error injecting script : \n' + chrome.runtime.lastError.message;
-	            console.log(result);
-	        }
-	    });
-
-	
+		
 	}
-	/*openTab() {
-		chrome.tabs.create({'url': chrome.extension.getURL('./src/index.html')});
-	}*/
+
 	render() {
 		
 		return (
 			<div>	
 
-				<h1>HII</h1>
+				<input type="text" name="email" onChange={this.handleEmailChange.bind(this)} />
+				<input type="password" name="password" onChange={this.handlePasswordChange.bind(this)} />
+				<button onClick={this.submit.bind(this)}>Submit</button>
 				
 			</div>
 		)
