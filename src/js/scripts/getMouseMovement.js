@@ -1,3 +1,5 @@
+	console.log("Received");
+
 	var i = 0;
 	document.onmousemove = function() {
 		if (i == 3) {
