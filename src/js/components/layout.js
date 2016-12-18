@@ -7,6 +7,7 @@ import { save, getInfo } from '../actions/index';
 import Main from './subComponents/main';
 
 class Layout extends React.Component {
+
 	constructor(){
 		super();
 		this.state = {
@@ -14,29 +15,35 @@ class Layout extends React.Component {
 			success:false,
 			instruction:"instruction",
 			setupBtn:"setupBtn",
-			imageState:"hidden"
+			imageState:"hidden",
+			spy:"spy",
+			changeEmail:'changeEmail'
 		}
-		
 	}
 
 	componentWillMount() {
-		
+		//gets a message from content script whether mouse was moved
 		chrome.runtime.onMessage.addListener(function(request, sender) {
-			//store the list of stylesheets in redux
+			//if mouse moved
   			if (request.caught) {
+  				//this is used to show the Got You message to the culprit
   				this.setState({success:true});
+  				//this is used as class name to show the image of the culprit
   				this.setState({imageState:"image"});
   			}
-  			
 		}.bind(this));
 	}
 
-	
-
-
-	sendImage() {
+	/*--------INJECT SCRIPT IN PAGE TO LISTEN FOR MOUSE MOVEMENT---------*/
+	setupWebcam() {
+		//the hidden state is used as class names to decide
+		//which elements to hide in the child component
 		this.setState({instruction:"hidden"});
 		this.setState({setupBtn:"hidden"});
+		this.setState({spy:"hidden"});
+		this.setState({changeEmail:"hidden"});
+
+		//injects content script
 		chrome.tabs.executeScript(null, {
 	        file: 'src/js/scripts/getMouseMovement.js'
 	     }, function() {
@@ -46,21 +53,20 @@ class Layout extends React.Component {
 	            console.log(result);
 	        }
 	    });
-		
-	
 	}
 
-	
+	/*-----SWITCH EMAILS--------*/
+	switchEmailAccount(){
+		//go back to email and password registration
+		browserHistory.push('/src/index.html');
+	}
 
-	
-	render() {
-		
+	render() {		
 		return (
 			<div>	
-
-				<Main imageState={this.state.imageState} setupBtn={this.state.setupBtn} instruction={this.state.instruction} setup={this.sendImage.bind(this)} />
-
-				{this.state.success && <h1>Got You</h1>}
+				{/*SHOW MESSAGE IF CULPRIT WAS CAUGHT*/}
+				{this.state.success && <h1>Got You B@#$%!</h1>}
+				<Main switchEmailAccount={this.switchEmailAccount} changeEmail={this.state.changeEmail} spy={this.state.spy} imageState={this.state.imageState} setupBtn={this.state.setupBtn} instruction={this.state.instruction} setup={this.setupWebcam.bind(this)} />
 			</div>
 		)
 	}
@@ -68,7 +74,6 @@ class Layout extends React.Component {
 
 function mapStateToProps(state) {
 	return {
-		example:state.example,
 		local:state.local,
 		info:state.info
 		

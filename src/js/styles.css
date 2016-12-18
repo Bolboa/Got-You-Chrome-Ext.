@@ -15,6 +15,176 @@
 	display: none;
 }
 
+#hidden {
+	display: none;
+}
+
 .image {
 	display: block !important;
+}
+
+#app {
+	width: 500px;
+}
+
+.loginHeader {
+	text-align: left;
+    max-width: 70%;
+    padding: 10px;
+    font-weight: normal;
+    font-size: 1.3em;
+    color: #ed4961;
+    font-family: Arial;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.emailWrap {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.passwordWrap {
+	width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.submitCreds {
+	width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.fa {
+    background: #ed4961;
+    padding: 10px;
+    color: white;
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: 1.5em;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+input[type="text"] {
+    outline: none;
+    padding: 10px;
+    color: #ed4961;
+    padding-bottom: 7px!important;
+    padding-left: 20px;
+    font-size: 1.3em;
+    width: 260px;
+    background: #f3f3f3;
+    border: 1px solid #f3f3f3;
+}
+
+input[type="password"] {
+    outline: none;
+    color: #ed4961;
+    padding: 10px;
+    padding-bottom: 7px!important;
+    padding-left: 20px;
+    font-size: 1.3em;
+    width: 260px;
+    background: #f3f3f3;
+    border: 1px solid #f3f3f3;
+}
+
+i.fa.fa-lock {
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 1.8em;
+    padding-top: 7px;
+    padding-bottom: 9px;
+    margin-top: 5px;
+}
+
+button.submitCreds {
+    background: #ed4961;
+    width: 332px;
+    margin-top: 5px;
+    cursor:pointer;
+    margin-left: 74px;
+    color: white;
+    font-size: 1.5em;
+    padding: 10px;
+    outline: none;
+    border: solid 1px #ed4961;
+    font-family: Arial;
+}
+
+a {
+    margin-left: 74px;
+    font-size: 1.1em;
+    cursor: pointer;
+    font-family: Arial;
+    color: #ed4961;
+}
+.changeEmail {
+	clear:left;
+	color:#010948;
+}
+
+.changeEmail:hover {
+	text-decoration: underline;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+i#spy {
+    background: white;
+    color: #010948;
+    font-size: 5em;
+    float: left;
+}
+
+.instruction {
+    text-align: left;
+    font-size: 1.3em;
+    font-family: Arial;
+    font-weight: bold;
+    color: #010948;
+    padding: 10px;
+}
+
+button#send_image {
+    background: #010948;
+    color: white;
+    font-family: Arial;
+    border: solid 1px #010948;
+    padding: 5px;
+    font-size: 1.4em;
+    width: 200px;
+    cursor: pointer;
+}
+
+.image {
+	animation:fadeinphoto 2s infinite;
+}
+
+@keyframes fadeinphoto {
+    0% { box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.75); }
+    50% { box-shadow: 0px 0px 11px 0px rgba(50, 50, 50, 0.75); }
+    100% { box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.75); }
+}
+
+@-moz-keyframes fadeinphoto {
+    0% { box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.75); }
+    50% { box-shadow: 0px 0px 11px 0px rgba(50, 50, 50, 0.75); }
+    A100% { box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.75); }
+}
+
+@-webkit-keyframes fadeinphoto {
+    0% { box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.75); }
+    50% { box-shadow: 0px 0px 11px 0px rgba(50, 50, 50, 0.75); }
+    100% { box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.75); }
 }

@@ -27,6 +27,10 @@ class Layout extends React.Component {
 		if (this.props.info != null) {
 			browserHistory.push('/src/index.html/layout');
 		}
+		//else throw an error, user will need to re-enter credentials
+		else {
+			this.setState({errMsg:'Sorry, we cannot remember the previous credentials.'});
+		}
 	}
 
 	/*-------SAVES EMAIL IN STATE AS USER TYPES--------*/
@@ -92,10 +96,17 @@ class Layout extends React.Component {
 	render() {	
 		return (
 			<div>	
-				<input type="text" name="email" onChange={this.handleEmailChange.bind(this)} />
-				<input type="password" name="password" onChange={this.handlePasswordChange.bind(this)} />
-				<button onClick={this.submit.bind(this)}>Submit</button>
-				<a onClick={this.noChange.bind(this)}>Use same email</a>
+				<div className="loginHeader">Please enter the email you wish to use. Ensure the password matches your email password</div>
+				<div className="emailWrap">
+					<i class="fa fa-envelope" aria-hidden="true"></i>
+					<input type="text" name="email" onChange={this.handleEmailChange.bind(this)} />
+				</div>
+				<div className="passwordWrap">
+					<i class="fa fa-lock" aria-hidden="true"></i>
+					<input type="password" name="password" onChange={this.handlePasswordChange.bind(this)} />
+				</div>
+				<button className="submitCreds" onClick={this.submit.bind(this)}>Submit</button>
+				<a onClick={this.noChange.bind(this)}>Use same credentials</a>
 				{/*IF ERROR MSG NOT EMPTY, SHOW ERROR*/}
 				{this.state.errMsg != '' && <div>{this.state.errMsg}</div>}			
 			</div>
@@ -105,7 +116,6 @@ class Layout extends React.Component {
 
 function mapStateToProps(state) {
 	return {
-		example:state.example,
 		local:state.local,
 		info:state.info
 	};
