@@ -12,3 +12,7 @@ Well say no more friend, this app will help you catch them in the act. They will
 * When the user clicks on setup, the extension will access the webcam. It is important that, once the button is clicked, the user should not move the mouse and just leave the computer as is. The extemsion injected a script to the page that waits until the mouse is moved, once it is moved, the webcam will take a picture of the culprit.
 
 ![Alt text](/images/step2.PNG)
+
+* Once the mouse is moved, the webcam will take a picture of the culprit.
+
+![Alt text](/images/step3.gif)
