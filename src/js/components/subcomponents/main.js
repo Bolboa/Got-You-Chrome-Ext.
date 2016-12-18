@@ -59,7 +59,9 @@ export default class Main extends Component{
 		//listens as to whether mouse was moved or not
 		chrome.runtime.onMessage.addListener(function(request, sender) {
 			//if mouse moved
+			console.log("here");
 			if (request.movement == true) {
+				console.log("here2");
 				//get the current image of canvas and save it as an image,
 				//essentially we are taking a picture of the video stream
 				var data = this.refs.localCanvas.toDataURL('image/png');		
