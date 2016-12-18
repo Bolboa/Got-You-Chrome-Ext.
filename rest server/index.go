@@ -27,7 +27,7 @@ type credentials struct {
 //initialize structure for credentials globally
 var creds credentials
 //initialize email type globally
-var smtp
+var smtp string
 
 /*------------------------VALIDATE USER CREDENTIALS-------------------------------*/
 func Validate(rw http.ResponseWriter, req *http.Request, _ httprouter.Params) {
@@ -93,6 +93,19 @@ func GetImage(rw http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	ioutil.WriteFile("./image.png", data, 0644)
 	sendImage()
 
+	//encode success message to JSON format
+	encoded, err := json.Marshal("success")
+	//send success message to the front end
+	emailSend, errSend := rw.Write(encoded)
+	//if not encoded, throw error (this will be read on the front end)
+	if errSend != nil {
+		panic(errSend)
+	}
+
+	fmt.Println(emailSend)
+
+
+
 
 }
 
@@ -105,7 +118,7 @@ func sendImage() {
 	mail.SetHeader("Subject", "works!")
 	mail.Attach("./image.png")
 
-	send := gomail.NewDialer("smtp."+smtp+".com", 587, cred.Email, creds.Password)
+	send := gomail.NewDialer("smtp."+smtp+".com", 587, creds.Email, creds.Password)
 	if err := send.DialAndSend(mail); err != nil {
 		panic(err)
 	}

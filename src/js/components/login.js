@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import { browserHistory } from 'react-router';
 import Main from './subComponents/main';
-
+import { save, getInfo } from '../actions/index';
 class Layout extends React.Component {
 
 	constructor(){
@@ -12,6 +12,20 @@ class Layout extends React.Component {
 			email:'',
 			password:'',
 			errMsg:''
+		}
+	}
+
+	componentDidMount() {
+		//use redux to get user credentials from local storage,
+		//credentials will be saved in this.props.info
+		this.props.getInfo();
+	}
+
+	/*----------USE SAME CREDENTIALS-------------*/
+	noChange() {
+		//if local storage is not empty, use credentials saved in local storage
+		if (this.props.info != null) {
+			browserHistory.push('/src/index.html/layout');
 		}
 	}
 
@@ -51,6 +65,8 @@ class Layout extends React.Component {
 			.then((responseJson) => {
 				//should print "success"
 				console.log(responseJson);
+				//use redux to save email and password in local storage
+				this.props.save(this.state.email, this.state.password);
 				//send user to next page
 				browserHistory.push('/src/index.html/layout');
 			})
@@ -79,6 +95,7 @@ class Layout extends React.Component {
 				<input type="text" name="email" onChange={this.handleEmailChange.bind(this)} />
 				<input type="password" name="password" onChange={this.handlePasswordChange.bind(this)} />
 				<button onClick={this.submit.bind(this)}>Submit</button>
+				<a onClick={this.noChange.bind(this)}>Use same email</a>
 				{/*IF ERROR MSG NOT EMPTY, SHOW ERROR*/}
 				{this.state.errMsg != '' && <div>{this.state.errMsg}</div>}			
 			</div>
@@ -88,12 +105,14 @@ class Layout extends React.Component {
 
 function mapStateToProps(state) {
 	return {
-		example:state.example
+		example:state.example,
+		local:state.local,
+		info:state.info
 	};
 }
 
 function matchDispatchToProps(dispatch) {
-	return bindActionCreators({}, dispatch);
+	return bindActionCreators({save, getInfo}, dispatch);
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(Layout);

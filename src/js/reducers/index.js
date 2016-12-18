@@ -1,7 +1,11 @@
 import {combineReducers} from 'redux';
-import Example from './example'; 
+
+import LocalStorage from './localStorage';
+import GetInfo from './getInfo';
+
 const allReducers = combineReducers({
-	example:Example
+	local:LocalStorage,
+	info:GetInfo
 });
 
 export default allReducers;

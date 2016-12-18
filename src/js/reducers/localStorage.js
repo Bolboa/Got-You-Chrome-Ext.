@@ -1,6 +1,6 @@
 export default function (state=null, action) {
 	switch(action.type) {
-		case "CSS_RECEIVED":
+		case "SAVE_STORAGE":
 			return action.payload;
 			break;
 	}

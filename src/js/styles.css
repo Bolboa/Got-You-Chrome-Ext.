@@ -9,3 +9,12 @@
 #photo {
 	display: none;
 }
+
+
+.hidden {
+	display: none;
+}
+
+.image {
+	display: block !important;
+}

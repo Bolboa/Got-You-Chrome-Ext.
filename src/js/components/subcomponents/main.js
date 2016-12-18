@@ -69,7 +69,7 @@ export default class Main extends Component{
 		})
 		.then((response) => response.json())
 		.then((responseJson) => {
-			console.log("response");
+			console.log(responseJson);
 		})
 		.catch(function(error) {
 			console.log(error);
@@ -81,13 +81,14 @@ export default class Main extends Component{
 	render(){
         return(
         	<div>
+        	<div className={this.props.instruction}>When you are ready to setup the spy cam, click the button below. Please make sure that you do not move the mouse after clicking the setup button.</div>
         	<video ref='localStream' className='localCanvas' width="320" height="240" autoPlay></video>
 
 			<canvas ref="localCanvas" id="canvas" width="640" height="480"></canvas>
 				
-    		<img id="photo" alt="The screen capture will appear in this box." src={this.state.imageSource} />
+    		<img className={this.props.imageState} id="photo" alt="The screen capture will appear in this box." src={this.state.imageSource} />
   				
-  			<button onClick={this.props.setup} id="send_image">SETUP</button>
+  			<button className={this.props.setupBtn} onClick={this.props.setup} id="send_image">SETUP</button>
   			</div>
         )
 
