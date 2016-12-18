@@ -116,7 +116,7 @@ func sendImage() {
 	mail := gomail.NewMessage()
 	mail.SetHeader("From", "ebolboa@gmail.com")
 	mail.SetHeader("To", creds.Email)
-	mail.SetHeader("Subject", "works!")
+	mail.SetHeader("Subject", "GOT YOU B@#$%!")
 	//add image as an attachment
 	mail.Attach("./image.png")
 	//send email using user info
