@@ -16,3 +16,7 @@ Well say no more friend, this app will help you catch them in the act. They will
 * Once the mouse is moved, the webcam will take a picture of the culprit.
 
 ![Alt text](/images/step3.gif)
+
+* The culprit was caught! He might think he can simply close the extension and the evidence is gone, but precautions have been taken to prevent that. If the user checks his email, he will see the image in his inbox.
+
+![Alt text](/images/step5.PNG)
