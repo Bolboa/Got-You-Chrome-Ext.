@@ -72,6 +72,7 @@ class Layout extends React.Component {
 	}
 }
 
+/*--------BIND REDUX STATES TO COMPONENT------*/
 function mapStateToProps(state) {
 	return {
 		local:state.local,
@@ -80,6 +81,7 @@ function mapStateToProps(state) {
 	};
 }
 
+/*------BIND REDUX ACTIONS TO COMPONENT--------*/
 function matchDispatchToProps(dispatch) {
 	return bindActionCreators({save, getInfo}, dispatch);
 }
